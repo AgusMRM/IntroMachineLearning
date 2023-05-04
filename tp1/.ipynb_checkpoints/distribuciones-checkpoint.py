@@ -49,4 +49,33 @@ def paralelo(d,n,C):
 
 
     return df
+
+def espirales_anidadas(n):
+
+    r2    = np.random.uniform(0, 1, n)
+    r = np.sqrt(r2)
+    tita = np.random.uniform(-2*np.pi, 4*np.pi, n)
+    x = r * np.cos(tita)
+    y = r * np.sin(tita)
+    
+  
+    
+    sel, = np.where((r > tita/(4*np.pi)) & (r < (tita + np.pi)/(4*np.pi)))
+    
+    # ---- esto es una chanchada ...
+    sel2, = np.where((r > (tita+2*np.pi)/(4*np.pi)) & (r < ((tita+2*np.pi) + np.pi)/(4*np.pi)))
+    sel3, = np.where((r > (tita+4*np.pi)/(4*np.pi)) & (r < ((tita+4*np.pi) + np.pi)/(4*np.pi)))
+    sel4, = np.where((r > (tita-2*np.pi)/(4*np.pi)) & (r < ((tita-2*np.pi) + np.pi)/(4*np.pi)))
+    sel5, = np.where((r > (tita-4*np.pi)/(4*np.pi)) & (r < ((tita-4*np.pi) + np.pi)/(4*np.pi)))
+    
+    sel = np.concatenate([sel,sel2,sel3,sel4,sel5])
+    # ------------------------------
+    
+    clases = np.ones(n)
+    clases[sel] = 0
+    
+    df = pd.DataFrame({'x' : x, 'y' : y, 'r' : r, 'tita' : tita})
+    df['clases'] = clases.astype(int)
+    
+    return df #x[sel],y[sel]
     
