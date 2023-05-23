@@ -4,10 +4,10 @@ import pandas as pd
 def diagonal(d,n,C):
     
     center1 = np.ones(d)
-    mcov1   = np.eye(d)*C*np.sqrt(d)
+    mcov1   = np.eye(d)*(C*np.sqrt(d))**2
     
     center2 = np.ones(d)*-1
-    mcov2   = np.eye(d)*C*np.sqrt(d)
+    mcov2   = np.eye(d)*(C*np.sqrt(d))**2
     
     points1 = np.random.multivariate_normal(center1, mcov1, int(n/2))
     points2 = np.random.multivariate_normal(center2, mcov2, int(n/2))
@@ -28,12 +28,12 @@ def paralelo(d,n,C):
     
     center1 = np.zeros(d)
     center1[0] = 1
-    mcov1   = np.eye(d)*C
+    mcov1   = np.eye(d)*C**2
     
     
     center2 = np.zeros(d)
     center2[0] = -1
-    mcov2   = np.eye(d)*C
+    mcov2   = np.eye(d)*C**2
     
     points1 = np.random.multivariate_normal(center1, mcov1, int(n/2))
     points2 = np.random.multivariate_normal(center2, mcov2, int(n/2))
